@@ -1,17 +1,20 @@
 variables:
-  - FIRST_SERVICE_HOST:
-      label: Название сервиса 1
-      type: string
+  - id: FIRST_SERVICE_HOST
+    label: Название сервиса 1
+    type: string
 
-  - SECOND_SERVICE_HOST:
-      label: Название сервиса 2
-      type: string
+  - id: SECOND_SERVICE_HOST
+    label: Название сервиса 2
+    type: string
 
 build:
   - docker-composer build --no-cache
 
 prepare:
   - cp .env.dist .env.local
+
+reset_prepare:
+  - rm -rf .env.local
 
 up:
   - docker-compose up -d --build
